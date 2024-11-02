@@ -112,7 +112,7 @@ Trình tự
 6. Kết thúc: Sau khi các giá trị được cập nhật, trigger hoàn thành và dừng lại.
 
 
-- Cập nhật số lượng tồn kho sau khi thêm, xoá, sửa thông tin đối tượng Đơn hàng bán
+- Cập nhật số lượng tồn kho sau khi thêm, xoá, sửa thông tin đối tượng chi tiết Đơn hàng bán
 
 ![image](https://github.com/user-attachments/assets/6b3f2785-959b-43b0-9d15-a4bc26b19e0e)
 
