@@ -6,7 +6,7 @@ Việc xây dựng cơ sở dữ liệu quản lý đơn hàng là một giải 
   1. Mô tả bài toán
   2. Phân tích và thiết kế cơ sở dữ liệu
   3. Một số ràng buộc toàn vẹn
-  4. Ứng dụng một số
+  4. Ứng dụng một số procedure, function, trigger vào bài toán
 ## 2. Mô tả bài toán
 Công ty sẽ bán rất nhiều Sản phẩm khác nhau, mỗi sản phẩm sẽ được phân biệt bằng mã sản phẩm, tên sản phẩm, đơn giá, mô tả, tồn kho. Để khách hàng dễ dàng lựa chọn, tìm kiếm thì các sản phẩm sẽ được phân loại theo Nhóm sản phẩm. Khách hàng có thể tìm đến công ty mua hàng thông qua các hình thức khác nhau (đến trực tiếp, liên hệ website, điện thoại, email, …),  thông tin của khách hàng sẽ được lưu trữ lại để dễ dàng truy xuất lịch sử mua hàng, thiết lập các chính sách ưu đãi khách hàng bao gồm: mã khách hàng, tên khách hàng, địa chỉ, số điên thoại,..
 
@@ -26,13 +26,107 @@ Truy vấn thông tin trên bảng: Chi Nhánh, Sản phẩm, Nhóm sản phẩm
 + Quản lý: được toàn quyền quyết định trên toàn bộ Cơ sở dữ liệu
 
 Tạo nhóm người dùng theo từng bộ phận
+
 ![image](https://github.com/user-attachments/assets/7cd35fa8-82c5-44cc-afca-902aaa3011c1)
 
 Phân quyền cho Role NhanVienBanHang
+
 ![image](https://github.com/user-attachments/assets/66136dd4-06a5-4e1f-80c1-727103b8053d)
 
 Phân quyền cho Role QuanLy
+
 ![image](https://github.com/user-attachments/assets/7ae0379c-7ee5-426f-bc56-17afd32e495f)
+
+### 3.3. Phân tích, thiết hệ thống CSDL cho chức năng quản lý Đơn hàng 
+- Mô hình ERD
+
+![image](https://github.com/user-attachments/assets/06931396-7ade-43d5-8c87-d4ba76bb6d7f)
+
+- Sơ đồ vật lý Diagram
+
+![image](https://github.com/user-attachments/assets/9af05155-6f6b-401e-a6d1-b74d112f17b5)
+
+
+- Từ mô hình thực thể kết hợp ERD ta xây dựng nên mô hình quan hệ dữ liệu như sau:
+
+TÀI KHOẢN (MaNV, TaiKhoan, MatKhau,  HoTen, ChucVu
+MaNV – Mã nhân viên là khoá chính
+
+
+KHACHHANG (MaKH, HoTenKH, DiaChiKH, SDTKH)
+MaKH – Mã khách hàng là khoá chính
+
+NHOM (MaNhomSP, TenNhomSP)
+MaNhomSP – Mã nhóm sản phẩm là khoá chính
+
+SANPHAM (MaSP, TenSP, SoLuongTon, GiaBan, GiaNhap, HinhAnh, MaNhomSP (FK) )
+MaSP – Mã sản phẩm là khoá chính
+MaNhomSP – Mã nhóm sản phẩm là khoá ngoại tham chiếu đến bảng Nhóm sản phẩm
+
+DONHANGBAN (MaDonBan, NgayLap, NgayGiao, TinhTrang, DiaChiGiao, GiamGia, MaKH (FK) , MaNV (FK), MaCN(FK))
+	MaDonBan – Mã đơn bán là khoá chính
+	MaKH – Mã khách hàng là khoá ngoại tham chiếu đến bảng Khách hàng
+	MaNV – Mã nhân viên là khoá ngoại tham chiếu đến bảng Nhân viên
+MaCN – Mã chi nhánh là khoá ngoại tham chiếu đến bảng Chi nhánh
+
+CTDONHANGBAN (MaDonBan (FK), MaSP (FK), SoLuongDat)
+MaDonBan – Mã đơn bán là khoá chính
+MaSP – Mã sản phẩm là khoá ngoại tham chiếu đến bảng Sản phẩm
+
+PHIEUTINHTIEN (MaPhieuTien, NgayLap, TongTien, GiamGia, TongCong, MaDonBan (FK), MaNV (FK)
+	MaPhieu – Mã hoá đơn là khoá chính
+	MaDonBan – Mã đơn bán là là khoá ngoại tham chiếu đến bảng Đơn hàng bán
+	MaNV – Mã nhân viên là khoá ngoại tham chiếu đến bảng Nhân viên
+
+CT PHIEUTINHTIEN (MaPhieuTien (FK), MaSP (FK), SoLuong, ThanhTien)
+MaPhieuTinhTien – Mã hoá đơn là khoá chính
+MaSP – Mã sản phẩm là khoá ngoại tham chiếu đến bảng Sản phẩm
+
+## 3.4. Một số ràng buộc toàn vẹn
+SanPham (MaSP, TenSanPham, SoLuongTon, GiaBan, GiaNhap, HinhAnh, MaNhomSP)
++ Mô tả: Số lượng tồn Sản phẩm phải lớn hơn hoặc bằng 0 
++) Biểu diễn: n SanPham (n.SoLuongTon >=0)
++) Bối cảnh: SanPham
+![image](https://github.com/user-attachments/assets/57befc98-a123-4bac-9c96-59cfeee493be)
+
+
+DonBanHang (MaDonBan, NgayLapDB, TinhTrang, DiaChiGiao, NgayGiao, TongTien, VAT, TongTienCuoi , MaNV (FK), MaKH (FK)) 
++) Mô tả: Với mọi Đơn bán hàng, Ngày Giao hàng (NgayGiao)  phải lớn hơn Ngày lập đơn đặt hàng (NgayLap)
++) Biểu diễn: n DonBanHang  (n.NgayGiao > n.NgayLapDB)
++) Bối cảnh: DonBanHang
+
+![image](https://github.com/user-attachments/assets/53937c21-b64b-4d61-9d7b-d3585cd99bfe)
+
+## 3.5. Ứng dụng một số procedure, function, trigger vào bài toán
+
+- Sau khi thêm mới hoặc update Phiếu tính tiền, giá trị của Tổng tiền, VAT và tổng cộng sẽ được cập nhật theo Đơn hàng bán
+
+![image](https://github.com/user-attachments/assets/8970254d-cfdc-45dd-916d-2f1354aeb931)
+
+Trình tự 
+1. Kích hoạt Trigger: Mỗi khi có dòng mới được thêm vào hoặc thay đổi trong bảng PhieuTinhTien, trigger này sẽ tự động chạy.
+2. Tạo bảng tạm tính toán: Trigger tạo một bảng tạm để tính tổng tiền của mỗi phiếu tính tiền (lấy từ chi tiết phiếu CTPhieuTinhTien) và lấy mức giảm giá (từ bảng DonHangBan).
+3. Cập nhật TongTien: Dùng tổng tiền vừa tính được, trigger cập nhật trường TongTien trong bảng PhieuTinhTien.
+4. Tính và cập nhật TongCong: Trigger tính TongCong bằng cách áp dụng giảm giá cho TongTien và cập nhật giá trị này vào cột TongCong.
+5. Cập nhật GiamGia: Trigger cập nhật trường GiamGia trong bảng PhieuTinhTien theo thông tin từ DonHangBan.
+6. Kết thúc: Sau khi các giá trị được cập nhật, trigger hoàn thành và dừng lại.
+
+- Cập nhật số lượng tồn kho sau khi thêm, xoá, sửa thông tin đối tượng Đơn hàng bán
+
+![image](https://github.com/user-attachments/assets/6b3f2785-959b-43b0-9d15-a4bc26b19e0e)
+
+Trình tự
+1. Trigger kích hoạt: Trigger này sẽ chạy sau khi có thao tác INSERT, DELETE, hoặc UPDATE trên bảng CTDonHangBan.
+2. Thêm chi tiết đơn hàng bán (INSERT): Nếu có dữ liệu trong inserted (bảng ảo chứa dữ liệu mới thêm), trigger sẽ giảm số lượng tồn (SoLuongTon) của sản phẩm trong bảng SanPham bằng cách trừ đi SoLuongDat (số lượng đặt hàng) của sản phẩm mới thêm.
+3. Xóa chi tiết đơn hàng bán (DELETE): Nếu có dữ liệu trong deleted (bảng ảo chứa dữ liệu bị xóa), trigger sẽ tăng số lượng tồn (SoLuongTon) của sản phẩm trong bảng SanPham bằng cách cộng lại SoLuongDat của sản phẩm đã bị xóa.
+4. Sửa chi tiết đơn hàng bán (UPDATE): Khi có dữ liệu trong cả inserted và deleted, nghĩa là có thao tác UPDATE. Trigger sẽ thực hiện hai bước:
+Trở về số lượng cũ: Tăng SoLuongTon bằng SoLuongDat của sản phẩm trước khi chỉnh sửa (dữ liệu từ deleted).
+Cập nhật số lượng mới: Giảm SoLuongTon theo SoLuongDat mới (dữ liệu từ inserted).
+5. Kết thúc: Sau khi các giá trị được cập nhật, trigger hoàn thành và dừng lại.
+
+
+
+
 
 
 
