@@ -1,4 +1,4 @@
-# Cơ sở dữ liệu quản lý Đơn hàng trong quy trình bán hàng cho SamwaTek
+# Cơ sở dữ liệu quản lý Đơn hàng cho SamwaTek
 ## 1. Tổng quan 
 Công ty TNHH Cơ Điện Samwa Tek là công ty hàng đầu trong lĩnh vực sản xuất sản phẩm công nghiệp phụ trợ, phục vụ các công ty đến từ Hàn Quốc, Nhật Bản và nhiều quốc gia khác.
 Việc xây dựng cơ sở dữ liệu quản lý đơn hàng là một giải pháp quan trọng cho Công ty TNHH Cơ Điện Samwa Tek nhằm nâng cao hiệu quả quản lý trong hoạt động bán hàng. Hiện tại, Samwa Tek đang quản lý thông tin đơn hàng và các dữ liệu liên quan theo phương pháp thủ công, dẫn đến việc xử lý thông tin chậm trễ, dễ xảy ra sai sót, và khó khăn khi cần tra cứu hoặc báo cáo. Khi áp dụng cơ sở dữ liệu quản lý đơn hàng, Samwa Tek sẽ có thể tổ chức thông tin một cách hệ thống và khoa học hơn, giúp nhân viên dễ dàng truy cập dữ liệu, cập nhật trạng thái đơn hàng theo thời gian thực, và theo dõi tiến trình giao hàng một cách rõ ràng.
