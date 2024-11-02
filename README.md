@@ -111,6 +111,7 @@ Trình tự
 5. Cập nhật GiamGia: Trigger cập nhật trường GiamGia trong bảng PhieuTinhTien theo thông tin từ DonHangBan.
 6. Kết thúc: Sau khi các giá trị được cập nhật, trigger hoàn thành và dừng lại.
 
+
 - Cập nhật số lượng tồn kho sau khi thêm, xoá, sửa thông tin đối tượng Đơn hàng bán
 
 ![image](https://github.com/user-attachments/assets/6b3f2785-959b-43b0-9d15-a4bc26b19e0e)
@@ -123,6 +124,16 @@ Trình tự
 Trở về số lượng cũ: Tăng SoLuongTon bằng SoLuongDat của sản phẩm trước khi chỉnh sửa (dữ liệu từ deleted).
 Cập nhật số lượng mới: Giảm SoLuongTon theo SoLuongDat mới (dữ liệu từ inserted).
 5. Kết thúc: Sau khi các giá trị được cập nhật, trigger hoàn thành và dừng lại.
+
+- Tạo thủ tục và sử dụng cursor, với tham số truyền vào là Mã Hoá Đơn, in ra kết quả cho biết Tên sản phẩm, Số lượng, đơn giá bán có trong Hoá đơn bán hàng
+
+![image](https://github.com/user-attachments/assets/31ab5c68-50e3-44a8-932d-1cfd346c40cf)
+
+
+- Tạo hàm cho biết tổng số lượng tồn theo từng loại hàng (gồm thông tin Mã loại hàng, Tên loại hàng, Tổng số lượng tồn)
+
+![image](https://github.com/user-attachments/assets/85c09ec7-821d-4f7d-921a-0b2b2fac2717)
+
 
 
 
