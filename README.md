@@ -140,6 +140,18 @@ Cập nhật số lượng mới: Giảm SoLuongTon theo SoLuongDat mới (dữ 
 ![image](https://github.com/user-attachments/assets/85c09ec7-821d-4f7d-921a-0b2b2fac2717)
 
 
+## Xây dựng báo cáo quản lý đơn hàng 
+
+![image](https://github.com/user-attachments/assets/8d84f825-73a4-4b66-bd40-697361dc3b97)
+
+Báo cáo cung cấp chi tiết biểu đồ trực quan biểu diễn thông tin về doanh thu bán hàng thu được từ việc quản lý đơn hàng được theo dõi chi tiết theo từng ngày và từng sản phẩm. 
+
+Với các con số cụ thể về doanh số bán hàng, số đơn hàng bán và số lượng sản phẩm bán ra được thể hiện lên báo cáo
+
+Người dùng có thể tuỳ chỉnh các Slicer để dễ dàng theo dõi và phân tích chi tiết theo từng thời gian cụ thể, chi nhánh bán hàng hoặc sản phẩm
+
+
+
 
 
 
